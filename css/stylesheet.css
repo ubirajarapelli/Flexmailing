@@ -1,0 +1,22 @@
+/* 
+	rgb(34,110,159);
+	rgb(61,151,210);
+*/
+body{
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 300;
+}
+.title-page{
+	color: rgb(34,110,159);
+	/*color: rgb(61,151,210);*/
+}
+.menu-item{
+	/*font-weight: 300;*/
+}
+.table-title{
+	font-weight: 400;
+}
+/* Overwirite */
+label {
+    font-weight: 400;
+}
