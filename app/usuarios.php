@@ -1,17 +1,12 @@
- <?php
-	
+<?php
 	include ('../conecta.php');
 	include ('../functions.php');
-	include ('../function_usuario.php');
 	include ('header.php');
-	include ('menu_adm.php');
 ?>
-<?php verificaUsuario(); ?>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">
 			<h1 class="title-page">Usuários</h1>
-			<?php #echo date("Y-m-d"); ?>
 		</div>
 		<div class="col-xs-10">
 			<p>Listagen de Usuários.<br>

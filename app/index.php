@@ -1,12 +1,8 @@
 <?php
-	
 	include ('../conecta.php');
 	include ('../functions.php');
-	include ('../function_usuario.php');
 	include ('header.php');
-	include ('menu_adm.php');
 ?>
-<?php verificaUsuario(); ?>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">

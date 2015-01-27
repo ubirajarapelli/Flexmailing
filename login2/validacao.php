@@ -6,7 +6,7 @@ if (!empty($_POST) AND (empty($_POST['usuario']) OR empty($_POST['senha']))) {
 }
 
 // Tenta se conectar ao servidor MySQL
-mysql_connect('localhost', 'root', 'root') or trigger_error(mysql_error());
+mysql_connect('localhost', 'root', 'ubirajara') or trigger_error(mysql_error());
 // Tenta se conectar a um banco de dados MySQL
 //mysql_select_db('database') or trigger_error(mysql_error());
 mysql_select_db('teste_login') or trigger_error(mysql_error());

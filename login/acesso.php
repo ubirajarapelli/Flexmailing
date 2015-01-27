@@ -1,26 +1,37 @@
 <?php
-  include ('../conecta.php');
- 	include ('../functions.php');
-  include ('../function_usuario.php');
-
   // Verifica se houve POST e se o usuário ou a senha é(são) vazio(s)
-  if (!empty($_POST) AND (empty($_POST['usuario']) OR empty($_POST['senha']))) {
-    header("Location: index.php"); exit;
-  }
-  $usuario = buscarUsuario($conexao, $_POST['usuario'], $_POST['senha']);
-  	#var_dump($usuario);
+if (!empty($_POST) AND (empty($_POST['usuario']) OR empty($_POST['senha']))) {
+  header("Location: index.php"); exit;
+}
 
-  if($usuario == null) {
-  $_SESSION["danger"] = "Usuário ou senha inválido.";
-  header("Location: index.php");
-    //echo "Login inválido!"; exit;
+// Tenta se conectar ao servidor MySQL
+     mysql_connect('localhost', 'root', 'ubirajara') or trigger_error(mysql_error());
+// Tenta se conectar a um banco de dados MySQL
+    mysql_select_db('teste_login') or trigger_error(mysql_error());
 
-  } else {
+$usuario = mysql_real_escape_string($_POST['usuario']);
+$senha = mysql_real_escape_string($_POST['senha']);
 
-  $_SESSION["success"] = "Usuário logado com sucesso.";
-  logarUsuario($usuario["email"]);
-  header("Location: ../app/");
+// Validação do usuário/senha digitados
+//$sql = "SELECT `id`, `nome`, `nivel` FROM `usuarios` WHERE (`usuario` = '". $usuario ."') AND (`senha` = '". sha1($senha) ."') AND (`ativo` = 1) LIMIT 1";
+//$sql = "SELECT `id`, `nome`, `nivel` FROM `usuarios` WHERE (`usuario` = '". $usuario ."') AND (`senha` = '". $senha ."') AND (`ativo` = 1) LIMIT 1";
+$sql = "select id, nome, nivel from usuarios where usuario = '". $usuario ."' AND senha = '". $senha ."' AND ativo = 1 LIMIT 1";
+$query = mysql_query($sql);
+if (mysql_num_rows($query) != 1) {
+  // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
+  echo "Login inválido!"; exit;
+} else {
+  // Salva os dados encontados na variável $resultado
+  $resultado = mysql_fetch_assoc($query);
 
-  }
-  die();
-  	
+  // Se a sessão não existir, inicia uma
+  if (!isset($_SESSION)) session_start();
+
+  // Salva os dados encontrados na sessão
+  $_SESSION['UsuarioID'] = $resultado['id'];
+  $_SESSION['UsuarioNome'] = $resultado['nome'];
+  $_SESSION['UsuarioNivel'] = $resultado['nivel'];
+
+  // Redireciona o visitante
+  header("Location: ../app/"); exit;
+}

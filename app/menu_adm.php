@@ -13,12 +13,10 @@
       <li class="menu-item"><a href="black_list.php">BLACK LIST</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <?php if(usuarioEstalogado()) {?>
-      <li class="menu-item"><a href=""><?= usuarioLogado() ?>
+      <li class="menu-item"><a href=""><?php echo $_SESSION['UsuarioNome']; ?>
         &nbsp;<span class="glyphicon glyphicon-user"></span>
         </a>
       </li>
-      <?php }else{ header("Location: ../login/");}?>
       <li class="menu-item"><a href="logout.php">Logout&nbsp;<span class="glyphicon glyphicon-off"></span></a></li>
     </ul>
   </div>

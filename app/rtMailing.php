@@ -2,12 +2,7 @@
 	
 	include ('../conecta.php');
 	include ('../functions.php');
-	include ('../function_usuario.php');
 	include ('header.php');
-	include ('menu_adm.php');
-
-
-	
 	function listarMailings($conexao){
 		$mailings = array();
 
@@ -25,7 +20,6 @@
 		return $mailings;
 	}
 ?>
-<?php verificaUsuario(); ?>
 <div class="container">
 <form action="#" method="POST"> 
 	<div class="row">
